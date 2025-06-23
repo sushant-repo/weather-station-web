@@ -3,6 +3,7 @@ import MapView from "@/components/map-view";
 import http from "@/plugins/http";
 import { useEffect, useState } from "react";
 import australianStates from "@/store/australian-states.js"
+import Modal from "@/components/modal";
 
 export default function Home() {
   const [stations, setStations] = useState([]);
@@ -11,6 +12,7 @@ export default function Home() {
 
 
   const [filteredStations, setFilteredStations] = useState([]);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const filtered = state === "All" ?
@@ -38,8 +40,16 @@ export default function Home() {
 
     getStations();
   }, [])
-  function handleMarkerClick(){}
 
+  function handleMarkerClick(){
+    setOpen(!open)
+  }
+
+  function handleCancel(){
+    setOpen(false);
+  }
+
+  
   return (
     <Container>
       <h1 className="text-2xl text-center my-4">Welcome to Weather Station!</h1>
@@ -67,6 +77,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Modal open={open}  onCancel={handleCancel}/>
     </Container>
   );
 }
