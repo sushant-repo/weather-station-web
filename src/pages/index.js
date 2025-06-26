@@ -95,7 +95,7 @@ export default function Home() {
       <Modal open={open}  onCancel={handleCancel}>
           <div className="grid grid-cols-3 gap-4 mb-4">
             <PreviewItem title="Station Name" value={station.ws_name}/>
-            <PreviewItem title="State" value={states.find(x => x.code === station.state).title}/>
+            <PreviewItem title="State" value={states.find(x => x.code === station.state)?.title}/>
             <PreviewItem title="Portfolio" value={station.portfolio}/>
             <PreviewItem title="Site" value={station.site}/>
           </div>
@@ -109,7 +109,7 @@ export default function Home() {
               </tr>
             </thead>
             <tbody>
-              {station.measurements.length > 0 ? (
+              {station.measurements?.length > 0 ? (
                 station.measurements.map(m => (
                   <tr key={m.id}>
                     <td style={cellStyle}>{m.timestamp}</td>
